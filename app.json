@@ -4,20 +4,27 @@
     "slug": "chimp-test-mobile-game",
     "version": "1.0.0",
     "orientation": "portrait",
-
     "userInterfaceStyle": "light",
-
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.chimptest.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "package": "com.chimptest.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "93533aa8-96f8-4a97-8872-0cafb76cb111"
+      }
     }
   }
 }

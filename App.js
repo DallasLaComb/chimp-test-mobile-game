@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from './src/lib/supabase';
 import Auth from './src/components/Auth';
-import Notes from './src/components/Notes';
+import GameMenu from './src/components/GameMenu';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -16,5 +16,5 @@ export default function App() {
     });
   }, []);
 
-  return session ? <Notes session={session} /> : <Auth />;
+  return session ? <GameMenu session={session} /> : <Auth />;
 }

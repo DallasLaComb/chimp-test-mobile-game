@@ -11,10 +11,12 @@ export default function Auth() {
     setLoading(true);
     try {
       const result = await api.login(email, password);
+      console.log('Login result:', result);
       if (result.error) {
         Alert.alert('Login failed', result.error);
       }
     } catch (error) {
+      console.log('Login error:', error);
       Alert.alert('Login failed', error.message);
     }
     setLoading(false);
@@ -24,12 +26,14 @@ export default function Auth() {
     setLoading(true);
     try {
       const result = await api.register(email, password);
+      console.log('Registration result:', result);
       if (result.error) {
         Alert.alert('Registration failed', result.error);
       } else {
-        Alert.alert('Success', 'Registration successful!');
+        Alert.alert('Success', 'Registration successful! You can now login.');
       }
     } catch (error) {
+      console.log('Registration error:', error);
       Alert.alert('Registration failed', error.message);
     }
     setLoading(false);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { supabase } from '../lib/supabase';
+import { api } from '../lib/api';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
@@ -9,23 +9,29 @@ export default function Auth() {
 
   async function signInWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
+    try {
+      const result = await api.login(email, password);
+      if (result.error) {
+        Alert.alert(result.error);
+      }
+    } catch (error) {
+      Alert.alert('Login failed', error.message);
+    }
     setLoading(false);
   }
 
   async function signUpWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
+    try {
+      const result = await api.register(email, password);
+      if (result.error) {
+        Alert.alert(result.error);
+      } else {
+        Alert.alert('Success', 'Registration successful!');
+      }
+    } catch (error) {
+      Alert.alert('Registration failed', error.message);
+    }
     setLoading(false);
   }
 

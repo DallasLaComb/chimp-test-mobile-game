@@ -22,11 +22,6 @@ jobs:
       - run: sam build
         working-directory: backend
       - run: |
-          # Delete failed stack if it exists
-          aws cloudformation delete-stack --stack-name chimp-test-backend || true
-          aws cloudformation wait stack-delete-complete --stack-name chimp-test-backend || true
-        working-directory: backend
-      - run: |
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset \
             --stack-name chimp-test-backend \
             --parameter-overrides \

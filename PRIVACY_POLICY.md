@@ -30,6 +30,8 @@ All data is encrypted in transit and at rest. We follow industry-standard securi
 
 ## Contact
 
-For privacy questions: [your-email@domain.com]
+For privacy questions: contact@chimptest.com
 
-Last updated: [Current Date]
+Last updated: September 2025
+
+**Privacy Policy URL:** https://raw.githubusercontent.com/DallasLaComb/chimp-test-mobile-game/master/PRIVACY_POLICY.md

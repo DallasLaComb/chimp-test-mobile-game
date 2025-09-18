@@ -6,6 +6,7 @@ const supabase = createClient(
 );
 
 exports.handler = async (event) => {
+    console.log('Event:', JSON.stringify(event, null, 2));
     const { httpMethod, pathParameters, body } = event;
     const path = event.path || event.rawPath;
     

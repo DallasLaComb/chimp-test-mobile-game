@@ -28,23 +28,3 @@ jobs:
             SupabaseUrl=${{ secrets.SUPABASE_URL }} \
             SupabaseKey=${{ secrets.SUPABASE_KEY }}
         working-directory: backend
-      - name: Cleanup old resources
-        run: |
-          # Get current stack resources
-          CURRENT_FUNCTION=$(aws cloudformation describe-stack-resources --stack-name chimp-test-backend --query 'StackResources[?ResourceType==`AWS::Lambda::Function`].PhysicalResourceId' --output text)
-          
-          # Delete old Lambda functions not in current stack
-          for func in $(aws lambda list-functions --query 'Functions[?starts_with(FunctionName, `chimp-test-backend-GameFunction`)].FunctionName' --output text); do
-            if [ "$func" != "$CURRENT_FUNCTION" ]; then
-              echo "Deleting old Lambda function: $func"
-              aws lambda delete-function --function-name "$func" || true
-            fi
-          done
-          
-          # Delete old log groups
-          for log_group in $(aws logs describe-log-groups --query 'logGroups[?contains(logGroupName, `chimp-test-backend-GameFunction`)].logGroupName' --output text); do
-            if [[ "$log_group" != *"$CURRENT_FUNCTION"* ]]; then
-              echo "Deleting old log group: $log_group"
-              aws logs delete-log-group --log-group-name "$log_group" || true
-            fi
-          done

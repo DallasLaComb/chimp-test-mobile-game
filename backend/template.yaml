@@ -65,6 +65,7 @@ Resources:
             RestApiId: !Ref ChimpTestApi
             Path: /notes/{id}
             Method: DELETE
+
         OptionsAuth:
           Type: Api
           Properties:

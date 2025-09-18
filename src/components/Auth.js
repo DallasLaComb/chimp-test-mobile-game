@@ -12,7 +12,7 @@ export default function Auth() {
     try {
       const result = await api.login(email, password);
       if (result.error) {
-        Alert.alert(result.error);
+        Alert.alert('Login failed', result.error);
       }
     } catch (error) {
       Alert.alert('Login failed', error.message);
@@ -25,7 +25,7 @@ export default function Auth() {
     try {
       const result = await api.register(email, password);
       if (result.error) {
-        Alert.alert(result.error);
+        Alert.alert('Registration failed', result.error);
       } else {
         Alert.alert('Success', 'Registration successful!');
       }

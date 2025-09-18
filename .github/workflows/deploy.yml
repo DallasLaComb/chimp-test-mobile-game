@@ -23,6 +23,7 @@ jobs:
         working-directory: backend
       - run: |
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset \
+            --stack-name chimp-test-backend \
             --parameter-overrides \
             SupabaseUrl=${{ secrets.SUPABASE_URL }} \
             SupabaseKey=${{ secrets.SUPABASE_KEY }}

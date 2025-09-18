@@ -35,12 +35,48 @@ Resources:
       CodeUri: src/
       Handler: game.handler
       Events:
-        GameApi:
+        AuthRegister:
           Type: Api
           Properties:
             RestApiId: !Ref ChimpTestApi
-            Path: /game/{proxy+}
-            Method: ANY
+            Path: /auth/register
+            Method: POST
+        AuthLogin:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /auth/login
+            Method: POST
+        NotesGet:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /notes
+            Method: GET
+        NotesPost:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /notes
+            Method: POST
+        NotesDelete:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /notes/{id}
+            Method: DELETE
+        OptionsAuth:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /auth/{proxy+}
+            Method: OPTIONS
+        OptionsNotes:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /notes/{proxy+}
+            Method: OPTIONS
 
   WebSocketApi:
     Type: AWS::ApiGatewayV2::Api

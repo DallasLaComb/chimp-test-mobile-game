@@ -1,36 +1,20 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { supabase } from './src/lib/supabase';
+import Auth from './src/components/Auth';
+import Notes from './src/components/Notes';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello from my computer!</Text>
-    </View>
-  );
-}
+  const [session, setSession] = useState(null);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f0f0f0',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    marginBottom: 50,
-    color: '#333',
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingHorizontal: 30,
-    paddingVertical: 15,
-    borderRadius: 8,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: '600',
-  },
-});
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
+
+  return session ? <Notes session={session} /> : <Auth />;
+}

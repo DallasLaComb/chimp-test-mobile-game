@@ -5,7 +5,7 @@ Assume the role of a SuperCell mobile game developer. Think like a professional 
 
 ## Tech Stack
 - **Frontend**: React Native with Expo
-- **Backend**: AWS Lambda + API Gateway + SAM
+- **Backend**: AWS Lambda + API Gateway + SAM (Node.js 22.x with ES modules)
 - **Database**: Supabase (PostgreSQL)
 - **Authentication**: Supabase Auth via API Gateway
 - **State Management**: React hooks
@@ -14,6 +14,7 @@ Assume the role of a SuperCell mobile game developer. Think like a professional 
 
 ## Development Standards
 - Write clean, maintainable code with proper separation of concerns
+- Use ES modules (import/export) for Node.js 22.x backend code
 - Focus on user experience and smooth gameplay mechanics
 - Implement proper error handling and loading states
 - Use TypeScript-style JSDoc comments for better code documentation

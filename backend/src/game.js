@@ -1,4 +1,4 @@
-const { createClient } = require('@supabase/supabase-js');
+import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
     process.env.SUPABASE_URL,
@@ -11,7 +11,7 @@ const supabase = createClient(
     }
 );
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
     console.log('Event:', JSON.stringify(event, null, 2));
     const { httpMethod, pathParameters, body } = event;
     const path = event.path || event.rawPath;

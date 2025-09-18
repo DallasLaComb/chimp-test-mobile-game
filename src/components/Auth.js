@@ -11,22 +11,17 @@ export default function Auth() {
   async function signInWithEmail() {
     setLoading(true);
     try {
-      console.log('Attempting login with:', email);
       const result = await api.login(email, password);
-      console.log('Login result:', result);
       if (result.error) {
         Alert.alert('Login failed', result.error);
-      } else {
-        console.log('Login successful, user:', result.user?.email);
-        // Set the session in Supabase client
+      } else if (result.session) {
         await supabase.auth.setSession({
           access_token: result.session.access_token,
           refresh_token: result.session.refresh_token
         });
       }
     } catch (error) {
-      console.log('Login error:', error);
-      Alert.alert('Login failed', error.message);
+      Alert.alert('Login failed', 'Please check your connection and try again.');
     }
     setLoading(false);
   }
@@ -41,7 +36,7 @@ export default function Auth() {
         Alert.alert('Success', 'Registration successful! You can now login.');
       }
     } catch (error) {
-      Alert.alert('Registration failed', error.message);
+      Alert.alert('Registration failed', 'Please check your connection and try again.');
     }
     setLoading(false);
   }

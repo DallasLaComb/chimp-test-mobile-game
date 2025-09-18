@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Chimp Test Game Backend
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: nodejs22.x
+    Environment:
+      Variables:
+        SUPABASE_URL: !Ref SupabaseUrl
+        SUPABASE_KEY: !Ref SupabaseKey
+
+Parameters:
+  SupabaseUrl:
+    Type: String
+    Default: https://stpkyvuzgidepzvcmfbx.supabase.co
+  SupabaseKey:
+    Type: String
+    NoEcho: true
+
+Resources:
+  ChimpTestApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: prod
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+
+  GameFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: game.handler
+      Events:
+        GameApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /game/{proxy+}
+            Method: ANY
+
+  WebSocketApi:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: ChimpTestWebSocket
+      ProtocolType: WebSocket
+      RouteSelectionExpression: "$request.body.action"
+
+Outputs:
+  ApiUrl:
+    Description: "API Gateway endpoint URL"
+    Value: !Sub "https://${ChimpTestApi}.execute-api.${AWS::Region}.amazonaws.com/prod/"
+  WebSocketUrl:
+    Description: "WebSocket API endpoint URL"
+    Value: !Sub "wss://${WebSocketApi}.execute-api.${AWS::Region}.amazonaws.com/prod/"

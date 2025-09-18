@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Chimp Test",
+    "slug": "chimp-test-mobile-game",
+    "version": "1.0.0",
+    "orientation": "portrait",
+
+    "userInterfaceStyle": "light",
+
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

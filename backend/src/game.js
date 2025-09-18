@@ -44,10 +44,15 @@ exports.handler = async (event) => {
         }
         
         if (path.includes('/auth/login')) {
+            console.log('Login attempt for:', requestBody.email);
             const { email, password } = requestBody;
             const { data, error } = await supabase.auth.signInWithPassword({ email, password });
             
-            if (error) throw error;
+            console.log('Supabase login result:', { data: !!data, error: error?.message });
+            if (error) {
+                console.log('Login error:', error);
+                throw error;
+            }
             return {
                 statusCode: 200,
                 headers,

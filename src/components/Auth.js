@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { api } from '../lib/api';
+import { supabase } from '../lib/supabase';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
@@ -10,11 +11,21 @@ export default function Auth() {
   async function signInWithEmail() {
     setLoading(true);
     try {
+      console.log('Attempting login with:', email);
       const result = await api.login(email, password);
+      console.log('Login result:', result);
       if (result.error) {
         Alert.alert('Login failed', result.error);
+      } else {
+        console.log('Login successful, user:', result.user?.email);
+        // Set the session in Supabase client
+        await supabase.auth.setSession({
+          access_token: result.session.access_token,
+          refresh_token: result.session.refresh_token
+        });
       }
     } catch (error) {
+      console.log('Login error:', error);
       Alert.alert('Login failed', error.message);
     }
     setLoading(false);

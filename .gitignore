@@ -149,3 +149,6 @@ web-build/
 *.mobileprovision
 .metro-health-check*
 .DS_Store
+
+# Backend secrets
+backend/env.json

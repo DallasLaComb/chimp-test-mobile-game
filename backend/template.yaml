@@ -69,13 +69,25 @@ Resources:
           Type: Api
           Properties:
             RestApiId: !Ref ChimpTestApi
-            Path: /auth/{proxy+}
+            Path: /auth/register
+            Method: OPTIONS
+        OptionsAuthLogin:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /auth/login
             Method: OPTIONS
         OptionsNotes:
           Type: Api
           Properties:
             RestApiId: !Ref ChimpTestApi
-            Path: /notes/{proxy+}
+            Path: /notes
+            Method: OPTIONS
+        OptionsNotesId:
+          Type: Api
+          Properties:
+            RestApiId: !Ref ChimpTestApi
+            Path: /notes/{id}
             Method: OPTIONS
 
   WebSocketApi:

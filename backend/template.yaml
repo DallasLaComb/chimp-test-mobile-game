@@ -82,7 +82,7 @@ Resources:
     Type: AWS::ApiGatewayV2::Api
     Properties:
       Name: ChimpTestWebSocket
-      ProtocolType: WebSocket
+      ProtocolType: WEBSOCKET
       RouteSelectionExpression: "$request.body.action"
 
 Outputs:
